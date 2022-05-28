@@ -14,7 +14,7 @@ export default function App() {
     BebasNeue_400Regular,
   });
 
-  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+  ScreenOrientation?.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
   if (!fontsLoaded) return <AppLoading />;
 

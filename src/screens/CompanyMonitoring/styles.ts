@@ -4,10 +4,11 @@ import { fonts } from "../../globalstyles/fonts";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: '100vh',
+    width: '100vw',
     marginTop: StatusBar.currentHeight,
-    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#000",
+    backgroundColor: "#fff",
   },
   head: {
     height: 22,

@@ -1,10 +1,11 @@
-import { Table, Row, Rows } from "react-native-table-component";
-import { View, ScrollView, SafeAreaView } from "react-native";
+import { View, ScrollView, Text, FlatList } from "react-native";
 import { styles } from "./styles";
 import CurrentTime from "../../components/currentTime";
-import { payload } from "../../services/fakeapi";
+import { useEffect, useState } from "react";
+import api from "../../services/api";
 
 export default function CompanyMonitoring() {
+  const [sectors, setSectors] = useState([]);
   const tableHead = [
     "PAM PLASTICOS",
     "MONITORAMENTO DA FABRICA",
@@ -34,38 +35,30 @@ export default function CompanyMonitoring() {
     ["PARADA - SP", "22", "34", "40", "65", "53 37 55", "65 28"],
   ];
 
-  return (
-    <ScrollView>
-      <ScrollView horizontal={true}>
-        <View style={styles.container}>
-          <Table
-            borderStyle={{
-              borderWidth: 1,
-              borderColor: "#b8babd",
-            }}
-          >
-            <Row
-              data={tableHead}
-              widthArr={[200, 750, 150]}
-              style={styles.head}
-              textStyle={styles.headText}
-            />
-            <Row
-              data={tableHead2}
-              widthArr={[200, 150, 150, 150, 150, 150, 150]}
-              style={styles.head}
-              textStyle={styles.headText}
-            />
+  const getSectors = async () => {
+    const { data } = await api.get('/');
+    setSectors(data.setores);
+  };
 
-            <Rows
-              data={tableSituation}
-              widthArr={[200, 150, 150, 150, 150, 150, 150]}
-              textStyle={styles.text}
-              style={styles.data}
-            />
-          </Table>
-        </View>
+  useEffect(() => {
+    getSectors();
+  }, []);
+
+  return (
+    <>
+      <ScrollView>
+        <ScrollView horizontal={true}>
+          {
+            sectors.length > 0 && (
+              <FlatList
+                data={sectors}
+                renderItem={({ item, index}) => <Text>{item.dsSetor}</Text>}
+              />
+            )
+          }
+
+        </ScrollView>
       </ScrollView>
-    </ScrollView>
+    </>
   );
 }
