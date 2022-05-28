@@ -1,4 +1,5 @@
-import { View, ScrollView, Text, FlatList } from "react-native";
+import { Table, Row, Rows } from "react-native-table-component";
+import { View, ScrollView, SafeAreaView } from "react-native";
 import { styles } from "./styles";
 import CurrentTime from "../../components/currentTime";
 import { useEffect, useState } from "react";
@@ -6,59 +7,85 @@ import api from "../../services/api";
 
 export default function CompanyMonitoring() {
   const [sectors, setSectors] = useState([]);
+  const [tableHead2, setTableHead2] = useState([]);
   const tableHead = [
     "PAM PLASTICOS",
     "MONITORAMENTO DA FABRICA",
     "RMC TECHNOLOGY",
   ];
 
-  const tableHead2 = [
-    <CurrentTime />,
-    "SETOR 01",
-    "SETOR 02",
-    "SETOR 03",
-    "SETOR 04",
-    "SETOR 05",
-    "SETOR 06",
-  ];
-  const tableSituation = [
-    ["FORA DE CICLO", "", "39 26", "44", "", "30 57 66", "59 11 13", ,],
-    ["AGUARDANDO TECNICO", "", "", "", "", "", "", ""],
-    ["REINICIO(DOM/FER)", "", "", "", "", "", ""],
-    ["PARADA - MANUTENÇAO", "", "", "", "", "", ""],
-    ["LIGACAO DE PERIFERICOS", "", "", "", "", "56 49", " 68 69"],
-    ["PARADA - FERRAMENTARIA", "", "", "", "", "48 52", ""],
-    ["TROCA DE MOLDE", "", "", "", "", "", ""],
-    ["PARADAS M.PRIMA", "", "", "", "", "", ""],
-    ["PARADA - OUTROS MOTIVOS", "", "27", "", "", "67 46", ""],
-    ["ALARME DE REFUGO", "", "39", "44", "", "", "10 09 13 11"],
-    ["PARADA - SP", "22", "34", "40", "65", "53 37 55", "65 28"],
-  ];
+  const fetchData = async () => {
+    const { setores } = (await api.get('/')).data;
 
-  const getSectors = async () => {
-    const { data } = await api.get('/');
-    setSectors(data.setores);
+    setSectors(setores);
+
+    let header: any = [
+      <CurrentTime />,
+      ...setores?.map((sector) => sector.dsSetor)
+    ];
+
+    let teste = setores.map(setor => {
+      return new Set(setor.situacoes.map(situacao => getSituacao(situacao.idSituacao)))
+    })
+
+    console.log(teste);
+    setTableHead2(header);
   };
 
+  const getSituacao = (type: number): string => ({
+    0: 'FORA DE CICLO',
+    1: 'AGUARDANDO TECNICO',
+    2: 'REINICIO(DOM/FER)',
+    3: 'PARADA - MANUTENÇAO',
+    4: 'LIGACAO DE PERIFERICOS',
+    5: 'PARADA - FERRAMENTARIA',
+    6: 'TROCA DE MOLDE',
+    7: 'PARADAS M.PRIMA',
+    8: 'PARADA - OUTROS MOTIVOS',
+    9: 'ALARME DE REFUGO',
+    10: 'PARADA - SP'
+  }[type] || 'paginasitedotz');
+
   useEffect(() => {
-    getSectors();
+    fetchData();
   }, []);
 
   return (
-    <>
-      <ScrollView>
-        <ScrollView horizontal={true}>
+    <ScrollView>
+      <ScrollView horizontal={true}>
+        <View style={styles.container}>
           {
             sectors.length > 0 && (
-              <FlatList
-                data={sectors}
-                renderItem={({ item, index}) => <Text>{item.dsSetor}</Text>}
-              />
+              <Table
+                borderStyle={{
+                  borderWidth: 1,
+                  borderColor: "#b8babd",
+                }}
+              >
+                <Row
+                  data={tableHead}
+                  widthArr={[200, 750, 150]}
+                  style={styles.head}
+                  textStyle={styles.headText}
+                />
+                <Row
+                  data={tableHead2}
+                  widthArr={[200, 150, 150, 150, 150, 150, 150]}
+                  style={styles.head}
+                  textStyle={styles.headText}
+                />
+
+                {/* <Rows
+                  data={tableSituation}
+                  widthArr={[200, 150, 150, 150, 150, 150, 150]}
+                  textStyle={styles.text}
+                  style={styles.data}
+                /> */}
+              </Table>
             )
           }
-
-        </ScrollView>
+        </View>
       </ScrollView>
-    </>
+    </ScrollView>
   );
 }

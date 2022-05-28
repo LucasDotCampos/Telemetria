@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     width: '100vw',
     marginTop: StatusBar.currentHeight,
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#000",
   },
   head: {
     height: 22,
