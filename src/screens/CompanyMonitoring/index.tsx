@@ -1,91 +1,108 @@
-import { Table, Row, Rows } from "react-native-table-component";
-import { View, ScrollView, SafeAreaView } from "react-native";
+import { View, ScrollView, SafeAreaView, Text } from "react-native";
 import { styles } from "./styles";
 import CurrentTime from "../../components/currentTime";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import { data } from './../../services/fakeapi';
+import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
+
+const SITUATIONS = {
+  text: [
+    'FORA DE CICLO',
+    'AGUARDANDO TECNICO',
+    'REINICIO(DOM/FER)',
+    'PARADA - MANUTENÇAO',
+    'LIGACAO DE PERIFERICOS',
+    'PARADA - FERRAMENTARIA',
+    'TROCA DE MOLDE',
+    'PARADAS M.PRIMA',
+    'PARADA - OUTROS MOTIVOS',
+    'ALARME DE REFUGO',
+    'PARADA - SP'
+  ],
+  height: [
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+  ]
+};
 
 export default function CompanyMonitoring() {
-  const [sectors, setSectors] = useState([]);
   const [tableHead2, setTableHead2] = useState([]);
+  const [situations, setSituations] = useState([]);
   const tableHead = [
+    "",
     "PAM PLASTICOS",
     "MONITORAMENTO DA FABRICA",
     "RMC TECHNOLOGY",
   ];
 
   const fetchData = async () => {
-    const { setores } = (await api.get('/')).data;
-
-    setSectors(setores);
+    // const { setores } = (await api.get('/')).data;
+    const { setores } = data;
 
     let header: any = [
       <CurrentTime />,
       ...setores?.map((sector) => sector.dsSetor)
     ];
-
-    let teste = setores.map(setor => {
-      return new Set(setor.situacoes.map(situacao => getSituacao(situacao.idSituacao)))
-    })
-
-    console.log(teste);
     setTableHead2(header);
   };
-
-  const getSituacao = (type: number): string => ({
-    0: 'FORA DE CICLO',
-    1: 'AGUARDANDO TECNICO',
-    2: 'REINICIO(DOM/FER)',
-    3: 'PARADA - MANUTENÇAO',
-    4: 'LIGACAO DE PERIFERICOS',
-    5: 'PARADA - FERRAMENTARIA',
-    6: 'TROCA DE MOLDE',
-    7: 'PARADAS M.PRIMA',
-    8: 'PARADA - OUTROS MOTIVOS',
-    9: 'ALARME DE REFUGO',
-    10: 'PARADA - SP'
-  }[type] || 'paginasitedotz');
 
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
-    <ScrollView>
-      <ScrollView horizontal={true}>
-        <View style={styles.container}>
-          {
-            sectors.length > 0 && (
-              <Table
-                borderStyle={{
-                  borderWidth: 1,
-                  borderColor: "#b8babd",
-                }}
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={{ width: '100%' }}>
+        <View>
+          <Table borderStyle={{borderWidth: 1, borderColor: '#cacaca'}}>
+            <Row
+              data={tableHead}
+              textStyle={{
+                color: '#fff',
+                paddingHorizontal: 8
+              }}
+              flexArr={[1, 1, 1, 1]}
+            />
+            <Row
+              data={tableHead2}
+              textStyle={{
+                color: '#fff',
+                paddingHorizontal: 8
+              }}
+              flexArr={[1, 1, 1, 1]}
+            />
+            <ScrollView horizontal>
+              <TableWrapper
+                style={{ flexDirection: 'row' }}
+                borderStyle={{ borderWidth: 1, borderColor: '#cacaca' }}
               >
-                <Row
-                  data={tableHead}
-                  widthArr={[200, 750, 150]}
-                  style={styles.head}
-                  textStyle={styles.headText}
+                <Col
+                  data={SITUATIONS.text}
+                  heightArr={SITUATIONS.height}
+                  textStyle={{
+                    color: '#fff',
+                    paddingHorizontal: 8
+                  }}
                 />
-                <Row
-                  data={tableHead2}
-                  widthArr={[200, 150, 150, 150, 150, 150, 150]}
-                  style={styles.head}
-                  textStyle={styles.headText}
+                <Rows
+                  textStyle={{ color: '#fff' }}
+                  data={[[1,2,3], [2,3,3]]}
                 />
-
-                {/* <Rows
-                  data={tableSituation}
-                  widthArr={[200, 150, 150, 150, 150, 150, 150]}
-                  textStyle={styles.text}
-                  style={styles.data}
-                /> */}
-              </Table>
-            )
-          }
+              </TableWrapper>
+            </ScrollView>
+          </Table>
         </View>
       </ScrollView>
-    </ScrollView>
+    </SafeAreaView>
   );
 }

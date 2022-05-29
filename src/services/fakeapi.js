@@ -1,4 +1,4 @@
-export const payload = {
+export const data = {
   setores: [
     {
       dsSetor: "EPS",
