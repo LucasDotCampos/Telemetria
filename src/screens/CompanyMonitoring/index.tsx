@@ -44,10 +44,19 @@ export default function CompanyMonitoring() {
     "MONITORAMENTO DA FABRICA",
     "RMC TECHNOLOGY",
   ];
+  let foraDeCiclo = [];
 
   const fetchData = async () => {
     // const { setores } = (await api.get('/')).data;
     const { setores } = data;
+
+    setores.forEach(setor =>
+      setor.situacoes.forEach(situacao => {
+        if (situacao.idSituacao === 0) {
+          foraDeCiclo.push(situacao.maquinas)
+        }
+      })
+    );
 
     let header: any = [
       <CurrentTime />,
@@ -96,7 +105,9 @@ export default function CompanyMonitoring() {
                 />
                 <Rows
                   textStyle={{ color: '#fff' }}
-                  data={[[1,2,3], [2,3,3]]}
+                  data={[
+                    foraDeCiclo,
+                  ]}
                 />
               </TableWrapper>
             </ScrollView>
