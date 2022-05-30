@@ -44,19 +44,27 @@ export default function CompanyMonitoring() {
     "MONITORAMENTO DA FABRICA",
     "RMC TECHNOLOGY",
   ];
-  let foraDeCiclo = [];
+  const [foraDeCiclo, setForaDeCiclo] = useState<any>([]);
 
   const fetchData = async () => {
     // const { setores } = (await api.get('/')).data;
     const { setores } = data;
+    let teste = [];
 
-    setores.forEach(setor =>
-      setor.situacoes.forEach(situacao => {
-        if (situacao.idSituacao === 0) {
-          foraDeCiclo.push(situacao.maquinas)
+
+    setores.forEach(setor => {
+      let array = [];
+
+      setor.situacoes.map(situacao => {
+        switch (situacao.idSituacao) {
+          case 8:
+            array.push(situacao.maquinas.map(maquina => maquina))
+          break;
         }
       })
-    );
+
+      teste.push(array);
+    });
 
     let header: any = [
       <CurrentTime />,
@@ -73,6 +81,7 @@ export default function CompanyMonitoring() {
     <SafeAreaView style={styles.container}>
       <ScrollView style={{ width: '100%' }}>
         <View>
+          <Text onPress={() => console.log(foraDeCiclo)} style={{ color: 'red'}}>CLIQUE AQUI</Text>
           <Table borderStyle={{borderWidth: 1, borderColor: '#cacaca'}}>
             <Row
               data={tableHead}
@@ -106,7 +115,7 @@ export default function CompanyMonitoring() {
                 <Rows
                   textStyle={{ color: '#fff' }}
                   data={[
-                    foraDeCiclo,
+                    // foraDeCiclo
                   ]}
                 />
               </TableWrapper>
