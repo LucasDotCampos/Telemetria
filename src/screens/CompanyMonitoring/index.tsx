@@ -37,7 +37,6 @@ const SITUATIONS = {
 
 export default function CompanyMonitoring() {
   const [tableHead2, setTableHead2] = useState([]);
-  const [situations, setSituations] = useState([]);
   const tableHead = [
     "",
     "PAM PLASTICOS",
@@ -49,39 +48,51 @@ export default function CompanyMonitoring() {
   const fetchData = async () => {
     // const { setores } = (await api.get('/')).data;
     const { setores } = data;
-    let teste = [];
-
+    let foradeCiclo = [];
 
     setores.forEach(setor => {
-      let array = [];
-
       setor.situacoes.map(situacao => {
         switch (situacao.idSituacao) {
           case 8:
-            array.push(situacao.maquinas.map(maquina => maquina))
+            foradeCiclo.push(situacao.maquinas.map(maquina => maquina));
           break;
         }
-      })
-
-      teste.push(array);
+      });
     });
+
 
     let header: any = [
       <CurrentTime />,
       ...setores?.map((sector) => sector.dsSetor)
     ];
     setTableHead2(header);
+    updateStates(
+      foradeCiclo
+    );
+  };
+
+  const updateStates = (foradeciclo) => {
+    setForaDeCiclo(foradeciclo);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
+  const renderItems = (items) => {
+    return items.map( (i, index) => {
+      return (
+        <View style={{ paddingHorizontal: 10 }}>
+          <Text style={{ color: i.corFonte }}>{i.idMaquina}</Text>
+        </View>
+      );
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={{ width: '100%' }}>
         <View>
-          <Text onPress={() => console.log(foraDeCiclo)} style={{ color: 'red'}}>CLIQUE AQUI</Text>
           <Table borderStyle={{borderWidth: 1, borderColor: '#cacaca'}}>
             <Row
               data={tableHead}
@@ -112,12 +123,17 @@ export default function CompanyMonitoring() {
                     paddingHorizontal: 8
                   }}
                 />
-                <Rows
-                  textStyle={{ color: '#fff' }}
-                  data={[
-                    // foraDeCiclo
-                  ]}
-                />
+                {
+                  foraDeCiclo.map((f, index) => {
+                    console.log(f);
+                    return (
+                      <Row
+                        flexArr={[1,1,1]}
+                        data={[renderItems(f)]}
+                      />
+                    );
+                  })
+                }
               </TableWrapper>
             </ScrollView>
           </Table>
