@@ -6,6 +6,7 @@ import { BebasNeue_400Regular } from "@expo-google-fonts/bebas-neue";
 import { useFonts } from "expo-font";
 import * as ScreenOrientation from "expo-screen-orientation";
 import CompanyMonitoring from "./src/screens/CompanyMonitoring";
+import Table from "./src/components/Table";
 
 export default function App() {
   LogBox.ignoreAllLogs(true);
@@ -18,5 +19,5 @@ export default function App() {
 
   if (!fontsLoaded) return <AppLoading />;
 
-  return <CompanyMonitoring />;
+  return <Table />;
 }
