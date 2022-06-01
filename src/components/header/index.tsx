@@ -13,7 +13,7 @@ import { styles } from "./styles";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 interface IConfig {
-  server: string;
+  ip: string;
   port: string;
 }
 
@@ -23,17 +23,14 @@ interface IPageName {
 
 export const HeaderComponent = ({ pageName }: IPageName) => {
   const [openSettings, setOpenSettings] = useState(false);
-  const [server, setServer] = useState("");
+  const [ip, setIp] = useState("");
   const [port, setPort] = useState("");
   let config: IConfig;
 
   const handleSubmit = async () => {
-    await AsyncStorage.setItem(
-      "@mapapp:config",
-      JSON.stringify({ server, port })
-    );
+    await AsyncStorage.setItem("@mapapp:config", JSON.stringify({ ip, port }));
     const response = await AsyncStorage.getItem("@mapapp:config");
-    console.log(response);
+
     setOpenSettings(false);
   };
 
@@ -42,7 +39,7 @@ export const HeaderComponent = ({ pageName }: IPageName) => {
 
     if (!config) return;
 
-    setServer(config.server);
+    setIp(config.ip);
     setPort(config.port);
   };
 
@@ -77,8 +74,8 @@ export const HeaderComponent = ({ pageName }: IPageName) => {
               <Text style={styles.label}>Servidor</Text>
               <TextInput
                 style={styles.input}
-                onChangeText={(text) => setServer(text)}
-                value={server}
+                onChangeText={(text) => setIp(text)}
+                value={ip}
               />
             </View>
             <View style={styles.input_container}>
