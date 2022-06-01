@@ -34,6 +34,7 @@ export default function Table() {
         <ScrollView horizontal>
           <Grid style={styles.grid}>
             <Row style={styles.head1}>
+              w{" "}
               <Col style={styles.head1Col1}>
                 <Text style={styles.text}>{tableHead[0]}</Text>
               </Col>
