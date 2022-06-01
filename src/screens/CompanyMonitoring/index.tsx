@@ -11,6 +11,7 @@ import {
   Rows,
   Col,
 } from "react-native-table-component";
+import { IMaquinas } from "../../interfaces";
 
 const SITUATIONS = [
   "FORA DE CICLO",
@@ -29,17 +30,21 @@ const SITUATIONS = [
 export default function CompanyMonitoring() {
   const [tableHead2, setTableHead2] = useState([]);
 
-  const [foraDeCiclo, setForaDeCiclo] = useState<any>([]);
-  const [aguardandoTecnico, setAguardandoTecnico] = useState<any>([]);
-  const [reinicio, setReinicio] = useState<any>([]);
-  const [paradaManutencao, setParadaManutencao] = useState<any>([]);
-  const [ligacaoPerifericos, setLigacaoPerifericos] = useState<any>([]);
-  const [paradaFerramentaria, setParadaFerramentaria] = useState<any>([]);
-  const [trocaMolde, setTrocaMolde] = useState<any>([]);
-  const [paradaMprima, setParadaMprima] = useState<any>([]);
-  const [paradaOutrosMotivos, setParadaOutrosMotivos] = useState<any>([]);
-  const [alarmeRefugo, setAlarmeRefugo] = useState<any>([]);
-  const [paradaSp, setParadaSp] = useState<any>([]);
+  const [foraDeCiclo, setForaDeCiclo] = useState<IMaquinas[]>([]);
+  const [aguardandoTecnico, setAguardandoTecnico] = useState<IMaquinas[]>([]);
+  const [reinicio, setReinicio] = useState<IMaquinas[]>([]);
+  const [paradaManutencao, setParadaManutencao] = useState<IMaquinas[]>([]);
+  const [ligacaoPerifericos, setLigacaoPerifericos] = useState<IMaquinas[]>([]);
+  const [paradaFerramentaria, setParadaFerramentaria] = useState<IMaquinas[]>(
+    []
+  );
+  const [trocaMolde, setTrocaMolde] = useState<IMaquinas[]>([]);
+  const [paradaMprima, setParadaMprima] = useState<IMaquinas[]>([]);
+  const [paradaOutrosMotivos, setParadaOutrosMotivos] = useState<IMaquinas[]>(
+    []
+  );
+  const [alarmeRefugo, setAlarmeRefugo] = useState<IMaquinas[]>([]);
+  const [paradaSp, setParadaSp] = useState<IMaquinas[]>([]);
 
   const tableHead = [
     "PAM PLASTICOS",
@@ -50,17 +55,17 @@ export default function CompanyMonitoring() {
   const fetchData = async () => {
     // const { setores } = (await api.get('/')).data;
     const { setores } = data;
-    let foradeCiclo = [];
-    let aguardandoTecnico = [];
-    let reinicioDomFer = [];
-    let paradaManutencao = [];
-    let ligacaoPerifericos = [];
-    let paradaFerramentaria = [];
-    let trocaMolde = [];
-    let paradaMPrima = [];
-    let paradaOutrosMotivos = [];
-    let alarmeDeRefugo = [];
-    let paradaSP = [];
+    let foradeCiclo: IMaquinas[] = [];
+    let aguardandoTecnico: IMaquinas[] = [];
+    let reinicioDomFer: IMaquinas[] = [];
+    let paradaManutencao: IMaquinas[] = [];
+    let ligacaoPerifericos: IMaquinas[] = [];
+    let paradaFerramentaria: IMaquinas[] = [];
+    let trocaMolde: IMaquinas[] = [];
+    let paradaMPrima: IMaquinas[] = [];
+    let paradaOutrosMotivos: IMaquinas[] = [];
+    let alarmeDeRefugo: IMaquinas[] = [];
+    let paradaSP: IMaquinas[] = [];
 
     setores.forEach((setor) => {
       setor.situacoes.map((situacao) => {
@@ -158,7 +163,7 @@ export default function CompanyMonitoring() {
     fetchData();
   }, []);
 
-  const renderItems = (items) => {
+  const renderItems = (items: IMaquinas) => {
     if (items.length === 0) {
       return (
         <View style={{ paddingHorizontal: 21 }}>
@@ -167,7 +172,7 @@ export default function CompanyMonitoring() {
       );
     }
 
-    return items.map((i, index) => {
+    return items.map((i) => {
       return (
         <View style={{ paddingHorizontal: 10 }}>
           <Text style={{ color: i.corFonte }}>{i.idMaquina}</Text>
@@ -216,9 +221,9 @@ export default function CompanyMonitoring() {
                   heightArr={[...Array(11).fill(40)]}
                   flexArr={[...Array(11).fill(1)]}
                   data={[
-                    foraDeCiclo?.map((f) => renderItems(f)),
-                    aguardandoTecnico?.map((f) => renderItems(f)),
-                    reinicio?.map((f) => renderItems(f)),
+                    foraDeCiclo.map((f) => renderItems(f)),
+                    aguardandoTecnico.map((f) => renderItems(f)),
+                    reinicio.map((f) => renderItems(f)),
                     paradaManutencao.map((f) => renderItems(f)),
                     ligacaoPerifericos.map((f) => renderItems(f)),
                     paradaFerramentaria.map((f) => renderItems(f)),
