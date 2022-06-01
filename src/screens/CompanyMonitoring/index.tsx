@@ -1,4 +1,4 @@
-import { View, ScrollView, SafeAreaView, Text } from "react-native";
+import { View, ScrollView, SafeAreaView, Text, Dimensions } from "react-native";
 import { styles } from "./styles";
 import CurrentTime from "../../components/currentTime";
 import { useEffect, useState } from "react";
@@ -67,43 +67,43 @@ export default function CompanyMonitoring() {
         switch (situacao.idSituacao) {
           case 0:
             foradeCiclo.push(situacao.maquinas.map((maquina) => maquina));
-          break;
+            break;
           case 1:
             aguardandoTecnico.push(situacao.maquinas.map((maquina) => maquina));
-          break;
+            break;
           case 2:
             reinicioDomFer.push(situacao.maquinas.map((maquina) => maquina));
-          break;
+            break;
           case 3:
             paradaManutencao.push(situacao.maquinas.map((maquina) => maquina));
-          break;
+            break;
           case 4:
             ligacaoPerifericos.push(
               situacao.maquinas.map((maquina) => maquina)
             );
-          break
+            break;
           case 5:
             paradaFerramentaria.push(
               situacao.maquinas.map((maquina) => maquina)
             );
-          break;
+            break;
           case 6:
             trocaMolde.push(situacao.maquinas.map((maquina) => maquina));
-          break;
+            break;
           case 7:
             paradaMPrima.push(situacao.maquinas.map((maquina) => maquina));
-          break;
+            break;
           case 8:
             paradaOutrosMotivos.push(
               situacao.maquinas.map((maquina) => maquina)
             );
-          break;
+            break;
           case 9:
             alarmeDeRefugo.push(situacao.maquinas.map((maquina) => maquina));
-          break;
+            break;
           case 10:
             paradaSP.push(situacao.maquinas.map((maquina) => maquina));
-          break;
+            break;
         }
       });
     });
@@ -201,6 +201,9 @@ export default function CompanyMonitoring() {
                 borderStyle={{ borderWidth: 1, borderColor: "#cacaca" }}
               >
                 <Col
+                  style={{ maxHeight: 440 }}
+                  heightArr={[...Array(11).fill(40)]}
+                  width={Dimensions.get("window").width / 4}
                   data={SITUATIONS}
                   textStyle={{
                     color: "#fff",
@@ -208,21 +211,22 @@ export default function CompanyMonitoring() {
                   }}
                 />
                 <Rows
-                  textStyle={{ color: 'white' }}
+                  style={{ width: Dimensions.get("window").width / 1.335 }}
+                  textStyle={{ color: "white" }}
                   heightArr={[...Array(11).fill(40)]}
                   flexArr={[...Array(11).fill(1)]}
                   data={[
-                    foraDeCiclo?.map(f => renderItems(f)),
-                    aguardandoTecnico?.map(f => renderItems(f)),
-                    reinicio?.map(f => renderItems(f)),
-                    paradaManutencao.map(f => renderItems(f)),
-                    ligacaoPerifericos.map(f => renderItems(f)),
-                    paradaFerramentaria.map(f => renderItems(f)),
-                    trocaMolde.map(f => renderItems(f)),
-                    paradaMprima.map(f => renderItems(f)),
-                    paradaOutrosMotivos.map(f => renderItems(f)),
-                    alarmeRefugo.map(f => renderItems(f)),
-                    paradaSp.map(f => renderItems(f))
+                    foraDeCiclo?.map((f) => renderItems(f)),
+                    aguardandoTecnico?.map((f) => renderItems(f)),
+                    reinicio?.map((f) => renderItems(f)),
+                    paradaManutencao.map((f) => renderItems(f)),
+                    ligacaoPerifericos.map((f) => renderItems(f)),
+                    paradaFerramentaria.map((f) => renderItems(f)),
+                    trocaMolde.map((f) => renderItems(f)),
+                    paradaMprima.map((f) => renderItems(f)),
+                    paradaOutrosMotivos.map((f) => renderItems(f)),
+                    alarmeRefugo.map((f) => renderItems(f)),
+                    paradaSp.map((f) => renderItems(f)),
                   ]}
                 />
               </TableWrapper>
