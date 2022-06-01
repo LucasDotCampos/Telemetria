@@ -101,7 +101,6 @@ export const data = {
         },
       ],
     },
-
     {
       dsSetor: "SETOR 01",
 
@@ -203,9 +202,423 @@ export const data = {
         },
       ],
     },
-
     {
       dsSetor: "SETOR 02",
+
+      situacoes: [
+        {
+          idSituacao: 0,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 1,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 2,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 3,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 4,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 5,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 6,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 7,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 8,
+
+          maquinas: [
+            {
+              idMaquina: "39",
+
+              corFonte: "#ff0000",
+            },
+
+            {
+              idMaquina: "42",
+
+              corFonte: "#ff0000",
+            },
+          ],
+        },
+
+        {
+          idSituacao: 9,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 10,
+
+          maquinas: [],
+        },
+      ],
+    },
+    {
+      dsSetor: "SETOR 03",
+
+      situacoes: [
+        {
+          idSituacao: 0,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 1,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 2,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 3,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 4,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 5,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 6,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 7,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 8,
+
+          maquinas: [
+            {
+              idMaquina: "39",
+
+              corFonte: "#ff0000",
+            },
+
+            {
+              idMaquina: "42",
+
+              corFonte: "#ff0000",
+            },
+          ],
+        },
+
+        {
+          idSituacao: 9,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 10,
+
+          maquinas: [],
+        },
+      ],
+    },
+    {
+      dsSetor: "SETOR 04",
+
+      situacoes: [
+        {
+          idSituacao: 0,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 1,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 2,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 3,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 4,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 5,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 6,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 7,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 8,
+
+          maquinas: [
+            {
+              idMaquina: "39",
+
+              corFonte: "#ff0000",
+            },
+
+            {
+              idMaquina: "42",
+
+              corFonte: "#ff0000",
+            },
+          ],
+        },
+
+        {
+          idSituacao: 9,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 10,
+
+          maquinas: [],
+        },
+      ],
+    },
+    {
+      dsSetor: "SETOR 05",
+
+      situacoes: [
+        {
+          idSituacao: 0,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 1,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 2,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 3,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 4,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 5,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 6,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 7,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 8,
+
+          maquinas: [
+            {
+              idMaquina: "39",
+
+              corFonte: "#ff0000",
+            },
+
+            {
+              idMaquina: "42",
+
+              corFonte: "#ff0000",
+            },
+          ],
+        },
+
+        {
+          idSituacao: 9,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 10,
+
+          maquinas: [],
+        },
+      ],
+    },
+    {
+      dsSetor: "SETOR 06",
+
+      situacoes: [
+        {
+          idSituacao: 0,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 1,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 2,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 3,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 4,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 5,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 6,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 7,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 8,
+
+          maquinas: [
+            {
+              idMaquina: "39",
+
+              corFonte: "#ff0000",
+            },
+
+            {
+              idMaquina: "42",
+
+              corFonte: "#ff0000",
+            },
+          ],
+        },
+
+        {
+          idSituacao: 9,
+
+          maquinas: [],
+        },
+
+        {
+          idSituacao: 10,
+
+          maquinas: [],
+        },
+      ],
+    },
+    {
+      dsSetor: "SETOR 07",
 
       situacoes: [
         {
