@@ -53,7 +53,7 @@ export default function CompanyMonitoring() {
 
     const response = await api(config.ip, config.port).get("/");
     console.log(response);
-    setSetores(response.data);
+    setSetores(response.data.setores);
   };
 
   useEffect(() => {
